@@ -4,11 +4,19 @@
 
 import express from 'express';
 import dotenv from 'dotenv'
+import airouter from './routes/ai'
+import sourcesrouter from './routes/sources';
 
 dotenv.config()
 
 const app = express();
 const port = 3000;
+
+//parse json
+app.use(express.json())
+
+app.use('/ai', airouter)
+app.use('/sources', sourcesrouter)
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
