@@ -7,18 +7,17 @@ const sourcesrouter = express.Router();
 dotenv.config();
 
 
-
 sourcesrouter.post('/keyword', async (req, res) => {
     try {
-        const {keyword} = req.body;
-        if (!keyword) 
+        const { keyword } = req.body;
+        if (!keyword) {
             return res.status(400).send('Keyword is required');
+        }
         const result = await getSources(keyword);
-        res.json(result);
+        res.send({ success: true, payload: result });
     } catch (error) {
         logger('Error in sourcesrouter', error as Error);
     }
-})
+});
 
 export default sourcesrouter;
-

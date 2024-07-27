@@ -12,7 +12,7 @@ airouter.post('/prompt', async (req, res) => {
         if (!prompt) 
             return res.status(400).send('Prompt is required');
         const result = await generateText(prompt);
-        res.json(result);
+        res.send({ success: true, payload: result });
     } catch (error) {
         logger('An error occurred in aiController', error as Error);
         res.status(500).send('An error occurred');
