@@ -1,20 +1,17 @@
-// UserText.tsx
-import React from 'react'
+import React from "react";
 
 interface UserTextProps {
-  message: string
+  message: string;
 }
 
 const UserText: React.FC<UserTextProps> = ({ message }) => {
   return (
-    <div className="mb-4">
-      <div className="flex items-end">
-        <div className="flex-grow">
-          <p className="text-white">{message}</p>
-        </div>
+    <div className="mb-4 mt-8 flex justify-end">
+      <div className="inline-block p-3 bg-secondary/10 rounded-lg">
+        <p className="text-white">{message}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserText
+export default UserText;

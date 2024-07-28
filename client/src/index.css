@@ -12,6 +12,13 @@
     --secondary: 33, 33, 33;
 }
 
-.adsf{
-    background-color: rgb(209, 209, 209);
+
+.small-scrollbar::-webkit-scrollbar {
+    width: 2px;
 }
+.small-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--secondary), 0.2);
+    border-radius: 2px;
+}
+
+

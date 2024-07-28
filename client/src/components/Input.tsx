@@ -1,4 +1,3 @@
-// Input.tsx
 import React, { useState, KeyboardEvent } from "react";
 
 interface InputProps {
@@ -13,6 +12,7 @@ const Input: React.FC<InputProps> = ({ setInput, sendMessage }) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
+      setInputValue("");
     }
   };
 
@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = ({ setInput, sendMessage }) => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-primary p-3 text-center">
+    <div className="bg-primary p-3 text-center h-20">
       <div className="max-w-3xl mx-auto flex flex-row gap-2  relative rounded-full bg-secondary/10 ">
         <textarea
           rows={1}
@@ -33,7 +33,10 @@ const Input: React.FC<InputProps> = ({ setInput, sendMessage }) => {
           className="w-11/12 px-8 py-3 text-secondary bg-transparent resize-none focus:outline-none"
         />
         <button
-          onClick={sendMessage}
+          onClick={() => {
+            sendMessage();
+            setInputValue("");
+          }}
           className="h-full absolute right-10 text-gray-400"
         >
           <svg
@@ -46,9 +49,9 @@ const Input: React.FC<InputProps> = ({ setInput, sendMessage }) => {
             viewBox="0 0 24 24"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M3 4a1 1 0 0 0-.822 1.57L6.632 12l-4.454 6.43A1 1 0 0 0 3 20h13.153a1 1 0 0 0 .822-.43l4.847-7a1 1 0 0 0 0-1.14l-4.847-7a1 1 0 0 0-.822-.43H3Z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             />
           </svg>
         </button>

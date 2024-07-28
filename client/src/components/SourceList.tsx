@@ -1,4 +1,3 @@
-// SourceList.tsx
 import React from 'react'
 
 interface SourceListProps {
