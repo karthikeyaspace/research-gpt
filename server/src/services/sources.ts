@@ -1,9 +1,9 @@
-import dotenv from 'dotenv';
+import config from '../utils/env';
 import logger from '../utils/helpers';
-dotenv.config();
+
 
 //sources from yt data api
-const apiKey = process.env.GOOGLE_PROJECT_KEY
+const apiKey = config.GOOGLE_PROJECT_KEY
 const getYTSources = async (urlParams: string) => {
     if (!apiKey) throw new Error("GOOGLE_PROJECT_KEY is not set");
     

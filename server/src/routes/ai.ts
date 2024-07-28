@@ -1,10 +1,7 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import { generateText } from '../controllers/aiController';
 import logger from '../utils/helpers';
 const airouter = express.Router();
-
-dotenv.config();
 
 airouter.post('/prompt', async (req, res) => {
     try {

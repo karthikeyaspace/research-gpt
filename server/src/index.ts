@@ -1,22 +1,19 @@
-//https://blog.logrocket.com/how-to-set-up-node-typescript-express/
-//https://github.com/hkirat/omegle/blob/master/backend/package.json
-
-
 import express from 'express';
-import dotenv from 'dotenv'
 import airouter from './routes/ai'
 import sourcesrouter from './routes/sources';
+import config from './utils/env';
 
-dotenv.config()
 
 const app = express();
-const port = 3000;
+const port = config.PORT || 3001;
 
 //parse json
 app.use(express.json())
 
+//routes
 app.use('/ai', airouter)
 app.use('/sources', sourcesrouter)
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
