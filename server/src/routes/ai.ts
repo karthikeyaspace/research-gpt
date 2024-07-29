@@ -5,10 +5,10 @@ const airouter = express.Router();
 
 airouter.post('/prompt', async (req, res) => {
     try {
-        const { prompt } = req.body;
-        if (!prompt) 
+        const { usertext } = req.body;
+        if (!usertext) 
             return res.status(400).send('Prompt is required');
-        const result = await generateText(prompt);
+        const result = await generateText(usertext); //json return
         res.send({ success: true, payload: result });
     } catch (error) {
         logger('An error occurred in aiController', error as Error);

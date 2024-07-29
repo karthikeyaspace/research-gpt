@@ -1,24 +1,27 @@
 import React, { useState, KeyboardEvent } from "react";
 
 interface InputProps {
-  setInput: React.Dispatch<React.SetStateAction<string>>;
-  sendMessage: () => void;
+  sendMessage: (ques: string) => void;
+  loading: boolean;
 }
 
-const Input: React.FC<InputProps> = ({ setInput, sendMessage }) => {
+const Input: React.FC<InputProps> = ({ sendMessage, loading }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if ((e.key === "Enter" && !e.shiftKey) && !loading) {
       e.preventDefault();
-      sendMessage();
-      setInputValue("");
+      sendMtoAI(inputValue)
     }
   };
 
+  const sendMtoAI = (ques: string) => {
+    sendMessage(ques);
+    setInputValue("");
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
-    setInput(e.target.value);
   };
 
   return (
@@ -30,17 +33,17 @@ const Input: React.FC<InputProps> = ({ setInput, sendMessage }) => {
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}
           placeholder="Research your topic"
-          className="w-11/12 px-8 py-3 text-secondary bg-transparent resize-none focus:outline-none"
+          className="w-11/12 px-12 py-[0.85rem] text-secondary bg-transparent resize-none focus:outline-none"
         />
         <button
           onClick={() => {
-            sendMessage();
-            setInputValue("");
+            sendMtoAI(inputValue)
           }}
-          className="h-full absolute right-10 text-gray-400"
+          disabled={loading || inputValue === ""}
+          className="h-full absolute right-5"
         >
           <svg
-            className="w-6 h-6  dark:text-white"
+            className={`w-6 h-6  ${(loading || inputValue==="") ? "text-white/20" : "text-white"}`}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -56,7 +59,7 @@ const Input: React.FC<InputProps> = ({ setInput, sendMessage }) => {
           </svg>
         </button>
       </div>
-      <p className="text-[10px] text-secondary leading-1">
+      <p className="text-[12px] text-[#8e8a8a]">
         Research gpt can make mistakes. Check important info
       </p>
     </div>
