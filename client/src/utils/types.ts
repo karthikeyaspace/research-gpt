@@ -29,4 +29,15 @@ interface SourcesProps {
   payload: Payload
 }
 
-export type { Payload, MessageType, ResponseTextProps, UserTextProps, InputProps, SourcesProps };
+interface YTCardProps {
+  source: {
+    videoId: string;
+    title: string;
+    description: string;
+    thumbnail: string;
+    channelTitle: string;
+    publishedAt: string;
+  };
+}
+
+export type { Payload, MessageType, ResponseTextProps, UserTextProps, InputProps, SourcesProps, YTCardProps };

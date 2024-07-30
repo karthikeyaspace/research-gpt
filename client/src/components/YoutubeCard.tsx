@@ -1,15 +1,5 @@
 import React from "react";
-
-interface YTCardProps {
-  source: {
-    videoId: string;
-    title: string;
-    description: string;
-    thumbnail: string;
-    channelTitle: string;
-    publishedAt: string;
-  };
-}
+import { YTCardProps } from "../utils/types";
 
 const YoutubeCard: React.FC<YTCardProps> = ({ source }) => {
   const { videoId, title, thumbnail, channelTitle, publishedAt } = source;
