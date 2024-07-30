@@ -3,27 +3,11 @@ import UserInput from "../components/UserInput";
 import axios from "axios";
 import ResponseText from "../components/ResponseText";
 import UserText from "../components/UserText";
-
-interface Message {
-  user: boolean;
-  payload: {
-    message: string;
-    keywords: string[];
-    follow_up_questions: string[];
-  };
-}
+import { MessageType } from "../utils/types";
+import {testChat, initChat}from "../utils/testMessages";
 
 const Chat: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      user: false,
-      payload: {
-        message: "Hello! I'm your Research Assistant",
-        keywords: [],
-        follow_up_questions: [],
-      },
-    },
-  ]);
+  const [messages, setMessages] = useState<MessageType[]>(initChat);
   const [loading, setLoading] = useState<boolean>(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -39,7 +23,7 @@ const Chat: React.FC = () => {
   };
 
   const sendMessage = async (ques: string) => {
-    if(ques.trim() === "") return;
+    if (ques.trim() === "") return;
     setMessages((prevMessages) => [
       ...prevMessages,
       {
@@ -79,18 +63,29 @@ const Chat: React.FC = () => {
     <div className="flex flex-col gap-4 min-h-screen w-full mx-auto pt-16">
       <div
         ref={chatContainerRef}
-        className="small-scrollbar max-w-3xl w-full h-[calc(100vh-11rem)] mx-auto py-6 px-4 overflow-y-auto"
+        className="small-scrollbar max-w-3xl w-full h-[calc(100vh-9.5rem)] mx-auto py-2 px-4 overflow-y-auto"
       >
         {messages.map((msg, index) =>
-          msg.user ? (
+          msg.user && msg.payload && msg.payload.message ? (
             <UserText key={index} payload={msg.payload} />
           ) : (
-            <ResponseText key={index} payload={msg.payload} sendMessage={sendMessage} />
+            <ResponseText
+              key={index}
+              payload={msg.payload}
+              sendMessage={sendMessage}
+            />
           )
         )}
-        {
-          loading && <ResponseText payload={{message: "loading", keywords: [], follow_up_questions: []}} sendMessage={sendMessage}/>
-        }
+        {loading && (
+          <ResponseText
+            payload={{
+              message: "loading",
+              keywords: [],
+              follow_up_questions: [],
+            }}
+            sendMessage={sendMessage}
+          />
+        )}
       </div>
       <UserInput sendMessage={sendMessage} loading={loading} />
     </div>

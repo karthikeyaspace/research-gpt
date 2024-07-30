@@ -1,12 +1,5 @@
 import React from "react";
-
-interface UserTextProps {
-  payload: {
-    message: string;
-    keywords: string[];
-    follow_up_questions: string[];
-  }
-}
+import { UserTextProps } from "../utils/types";
 
 const UserText: React.FC<UserTextProps> = ({ payload }) => {
   return (

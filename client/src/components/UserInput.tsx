@@ -1,12 +1,9 @@
 import React, { useState, KeyboardEvent } from "react";
+import { InputProps } from "../utils/types";
 
-interface InputProps {
-  sendMessage: (ques: string) => void;
-  loading: boolean;
-}
 
 const Input: React.FC<InputProps> = ({ sendMessage, loading }) => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if ((e.key === "Enter" && !e.shiftKey) && !loading) {
@@ -25,7 +22,7 @@ const Input: React.FC<InputProps> = ({ sendMessage, loading }) => {
   };
 
   return (
-    <div className="bg-primary p-3 text-center h-20">
+    <div className="bg-primary px-4 text-center">
       <div className="max-w-3xl mx-auto flex flex-row gap-2  relative rounded-full bg-secondary/10 ">
         <textarea
           rows={1}

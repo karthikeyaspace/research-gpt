@@ -4,10 +4,10 @@ import logger from '../utils/helpers';
 
 //sources from yt data api
 const apiKey = config.GOOGLE_PROJECT_KEY
-const getYTSources = async (urlParams: string) => {
+const getYTSources = async (keywords: []) => {
     if (!apiKey) throw new Error("GOOGLE_PROJECT_KEY is not set");
-    
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&${urlParams}`;
+    const q = keywords.join("|");
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&maxResults=10&relevanceLanguage=en&type=video&q=${q}`;
     try{
         const response = await fetch(url);
         const data = await response.json();
