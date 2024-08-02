@@ -27,13 +27,13 @@ const signIn = async (email: string, password: string) => {
 
 const signInWithGoogle = async () => {
   try{
-    const { user, error }: any = await supabase.auth.signInWithOAuth({
+    const { data, error }  = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "http://localhost:5173/chat",
+        redirectTo: "http://localhost:3000/chat",
       },
     });
-    return { user, error };
+    return { user: data, error };
   }
   catch (error) {
     return { error };

@@ -3,10 +3,10 @@ import { signIn, signUp, signInWithGoogle } from "../services/api";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../assets/Logo.tsx";
+import { useTheme } from "../context/ThemeContext.tsx";
 
 const Login: React.FC = () => {
   const { session } = useAuth();
-  console.log(session, "session");
   if (session) return <Navigate to="/chat" />;
 
   const [formData, setFormData] = useState({
@@ -15,6 +15,7 @@ const Login: React.FC = () => {
   });
   const [error, setError] = useState("");
   const [login, setLogin] = useState(true);
+  const {theme} = useTheme();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,7 +37,7 @@ const Login: React.FC = () => {
 
   const handleGoogleSingIn = async () => {
     const { user,  error } = await signInWithGoogle();
-    if (error) setError(error);
+    if (error) setError(error.toString());
     else console.log(user, "google user")
   };
 
@@ -44,7 +45,11 @@ const Login: React.FC = () => {
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md p-8">
         <div className="mb-12 text-center  space-y-24 ">
-          <Logo primary="#212121" secondary="white" width="36" />
+        <Logo
+          primary={theme === "dark" ? "#212121" : "#f6f6f6"}
+          secondary={theme === "dark" ? "#f6f6f6" : "#212121"}
+          width="48"
+        />
           <h2 className="mt-6 text-3xl font-extrabold text-secondary">
             {login ? "Welcome back" : "Create an account"}
           </h2>

@@ -80,7 +80,7 @@ const testChat = [
   {
     user: true,
     payload: {
-      message: "3d printing",
+      message: "AR VR",
       keywords: [],
       follow_up_questions: [],
     },

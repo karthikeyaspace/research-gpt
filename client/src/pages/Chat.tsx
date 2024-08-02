@@ -7,7 +7,7 @@ import { MessageType } from "../utils/types";
 import {testChat, initChat}from "../utils/testMessages";
 
 const Chat: React.FC = () => {
-  const [messages, setMessages] = useState<MessageType[]>(initChat);
+  const [messages, setMessages] = useState<MessageType[]>(testChat);
   const [loading, setLoading] = useState<boolean>(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 

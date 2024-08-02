@@ -40,7 +40,7 @@ const Input: React.FC<InputProps> = ({ sendMessage, loading }) => {
           className="h-full absolute right-5"
         >
           <svg
-            className={`w-6 h-6  ${(loading || inputValue==="") ? "text-white/20" : "text-white"}`}
+            className={`w-6 h-6  ${(loading || inputValue==="") ? "text-secondary/20" : "text-secondary/80"}`}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
