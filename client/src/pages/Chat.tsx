@@ -49,7 +49,7 @@ const Chat: React.FC = () => {
 
   const fetchPrompt = async (prompt: string) => {
     try {
-      const response = await axios.post(url + "/api/ai/prompt", { usertext: prompt });
+      const response = await axios.post(url + "/ai/prompt", { usertext: prompt });
 
       if (response.data.success) {
         setMessages((prevMessages) => [

@@ -17,7 +17,7 @@ const Sources: React.FC<SourcesProps> = ({ show, toggleShow, payload }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.post(url+"/api/sources/keywords", {
+        const response = await axios.post(url+"/sources/keywords", {
           keywords: payload.keywords,
         });
         if (response.data.success) setSources(response.data.payload);
