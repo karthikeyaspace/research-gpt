@@ -10,6 +10,8 @@ import Landing from "./pages/Landing";
 import Chat from "./pages/Chat";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
+
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
@@ -30,12 +32,12 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
 const AppContent: React.FC = () => {
   const { pathname } = useLocation();
-  const isLanding = pathname === "/";
-  const { theme, toggleTheme } = useTheme();
+  const isNotLanding = pathname === "/login" || pathname === "/chat";
+  const { theme } = useTheme();
 
   return (
     <div className={`${theme} min-h-screen bg-primary`}>
-      {!isLanding && <Navbar />}
+      {isNotLanding && <Navbar />}
       <Suspense fallback={<div>Loading.....</div>}>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -48,17 +50,9 @@ const AppContent: React.FC = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </Suspense>
-      
-      <div className="fixed bottom-0 right-0 ">
-        <button
-          onClick={toggleTheme}
-          className="bg-primary border border-secondary/40 p-2 rounded-full m-4"
-        >
-          {theme === "dark" ? "🌞" : "🌙"}
-        </button>
-      </div>
     </div>
   );
 };

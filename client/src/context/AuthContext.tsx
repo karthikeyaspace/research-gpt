@@ -6,12 +6,8 @@ import {
   ReactNode,
 } from "react";
 import { supabase } from "../services/supabase";
-import { Session } from "@supabase/supabase-js";
-
-interface AuthContextTypes {
-  session: Session | null;
-  signOut: () => void;
-}
+import { AuthContextTypes } from "../utils/types";
+import { Session } from "../utils/types";
 
 const AuthContext = createContext<AuthContextTypes | undefined>(undefined);
 

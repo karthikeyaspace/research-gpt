@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../assets/Logo";
 import { useTheme } from "../context/ThemeContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { clearChat } from "../utils/localStoragChat";
 
 const Navbar: React.FC = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { session, signOut } = useAuth();
   const word = session?.user.user_metadata.email[0].toUpperCase() || "?";
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
 
   return (
-    <nav className="h-16 px-6 w-full fixed top-0 left-0 text-white z-10 flex justify-between items-center">
+    <nav className="h-16 px-6 w-full fixed top-0 left-0 text-white bg-primary z-10 flex justify-between items-center">
       <Link to="/">
         <div className="flex items-center hover:cursor-pointer">
           <Logo
@@ -50,16 +52,35 @@ const Navbar: React.FC = () => {
               >
                 Source Code
               </a>
-              <button className="text-primary hover:bg-primary/10 p-2 rounded-md flex items-center transition duration-150">
-                Clear Chat
-              </button>
-              <hr className="my-2 border-primary/20" />
               <button
-                onClick={() => signOut()}
-                className="text-red-500 hover:bg-red-500/10 p-2 rounded-md flex items-center transition duration-150"
+                className="text-primary hover:bg-primary/10 p-2 rounded-md flex items-center transition duration-150"
+                onClick={toggleTheme}
               >
-                Sign out
+                Toggle Theme
               </button>
+              {session && (
+                <>
+                  <button
+                    className="text-primary hover:bg-primary/10 p-2 rounded-md flex items-center transition duration-150"
+                    onClick={() => {
+                      clearChat();
+                      setShowMenu(!showMenu);
+                    }}
+                  >
+                    Clear Chat
+                  </button>
+                  <hr className="my-2 border-primary/20" />
+                  <button
+                    onClick={() => {
+                      signOut();
+                      navigate('/')
+                    }}
+                    className="text-red-500 hover:bg-red-500/10 p-2 rounded-md flex items-center transition duration-150"
+                  >
+                    Sign out
+                  </button>
+                </>
+              )}
             </div>
           </motion.div>
         )}

@@ -36,13 +36,12 @@ const Login: React.FC = () => {
   };
 
   const handleGoogleSingIn = async () => {
-    const { user,  error } = await signInWithGoogle();
+    const { error } = await signInWithGoogle();
     if (error) setError(error.toString());
-    else console.log(user, "google user")
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen pt-10">
       <div className="w-full max-w-md p-8">
         <div className="mb-12 text-center  space-y-24 ">
         <Logo

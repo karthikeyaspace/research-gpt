@@ -15,7 +15,7 @@ interface ResponseTextProps {
 }
 
 interface UserTextProps {
-  payload: Payload
+  payload: Payload;
 }
 
 interface InputProps {
@@ -26,8 +26,9 @@ interface InputProps {
 interface SourcesProps {
   show: boolean;
   toggleShow: () => void;
-  payload: Payload
+  payload: Payload;
 }
+
 
 interface YTCardProps {
   source: {
@@ -40,4 +41,36 @@ interface YTCardProps {
   };
 }
 
-export type { Payload, MessageType, ResponseTextProps, UserTextProps, InputProps, SourcesProps, YTCardProps };
+interface GoogleCardProps {
+  source: {
+    title: string;
+    link: string;
+    snippet: string;
+  };
+}
+
+import { Session } from "@supabase/supabase-js";
+
+interface AuthContextTypes {
+  session: Session | null;
+  signOut: () => void;
+}
+
+interface ThemeContextTypes {
+  theme: "dark" | "light";
+  toggleTheme: () => void;
+}
+
+export type {
+  Payload,
+  MessageType,
+  ResponseTextProps,
+  UserTextProps,
+  InputProps,
+  SourcesProps,
+  YTCardProps,
+  GoogleCardProps,
+  AuthContextTypes,
+  Session,
+  ThemeContextTypes,
+};

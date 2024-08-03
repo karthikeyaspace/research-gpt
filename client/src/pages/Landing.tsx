@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const Landing = () => {
+const Landing: React.FC = () => {
   const data = [
     { icon: "🚀", title: "Fast", description: "Get results in seconds" },
     {
@@ -17,7 +17,7 @@ const Landing = () => {
     },
   ];
   return (
-    <div className="min-h-screen bg-primary flex flex-col items-center justify-center px-4 pt-12">
+    <div className="min-h-screen bg-primary flex flex-col items-center justify-center px-4 py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ const Landing = () => {
           Revolutionize your research process with AI-powered insights and
           analysis.
         </motion.p>
-        <Link to="/chat">
+        <Link to="/login">
           <motion.button
             initial={{ opacity: 0, y: 0 }}
             animate={{ opacity: 1, y: 0 }}

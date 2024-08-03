@@ -48,7 +48,7 @@ const ResponseText: React.FC<ResponseTextProps> = ({
                   <span
                     key={index}
                     onClick={() => handleFollowUp(ques)}
-                    className="inline-block bg-secondary/10 text-secondary text-xs rounded-full px-2 py-1 mb-1 mr-2 hover:cursor-pointer"
+                    className="inline-block bg-secondary/10 text-secondary text-xs rounded-full px-3   py-1 mb-1 mr-2 hover:cursor-pointer"
                   >
                     {ques}
                   </span>

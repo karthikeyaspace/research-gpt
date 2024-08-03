@@ -4,15 +4,19 @@ import axios from "axios";
 import ResponseText from "../components/ResponseText";
 import UserText from "../components/UserText";
 import { MessageType } from "../utils/types";
-import {testChat, initChat}from "../utils/testMessages";
+import { initChat } from "../utils/testMessages";
+import { getChat, storeChat } from "../utils/localStoragChat";
 
 const Chat: React.FC = () => {
-  const [messages, setMessages] = useState<MessageType[]>(testChat);
+  const [messages, setMessages] = useState<MessageType[]>(
+    getChat().length > 0 ? getChat() : initChat
+  );
   const [loading, setLoading] = useState<boolean>(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollToBottom();
+    storeChat(messages);
   }, [messages, loading]);
 
   const scrollToBottom = () => {
