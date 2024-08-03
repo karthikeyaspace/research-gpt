@@ -6,6 +6,7 @@ import UserText from "../components/UserText";
 import { MessageType } from "../utils/types";
 import { initChat } from "../utils/testMessages";
 import { getChat, storeChat } from "../utils/localStoragChat";
+const url = import.meta.env.VITE_BACKEND_URL;
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<MessageType[]>(
@@ -48,7 +49,7 @@ const Chat: React.FC = () => {
 
   const fetchPrompt = async (prompt: string) => {
     try {
-      const response = await axios.post("/api/ai/prompt", { usertext: prompt });
+      const response = await axios.post(url + "/api/ai/prompt", { usertext: prompt });
 
       if (response.data.success) {
         setMessages((prevMessages) => [

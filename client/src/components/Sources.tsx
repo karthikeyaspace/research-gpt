@@ -4,6 +4,7 @@ import { SourcesProps } from "../utils/types";
 import YoutubeCard from "./YoutubeCard";
 import loadingGif from "../assets/loading.gif";
 import GoogleSearchCard from "./GoogleSearchCard";
+const url = import.meta.env.VITE_BACKEND_URL;
 
 const Sources: React.FC<SourcesProps> = ({ show, toggleShow, payload }) => {
   const [sources, setSources] = useState<any>({
@@ -16,7 +17,7 @@ const Sources: React.FC<SourcesProps> = ({ show, toggleShow, payload }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.post("/api/sources/keywords", {
+        const response = await axios.post(url+"/api/sources/keywords", {
           keywords: payload.keywords,
         });
         if (response.data.success) setSources(response.data.payload);
