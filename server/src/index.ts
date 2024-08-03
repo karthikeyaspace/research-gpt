@@ -11,7 +11,13 @@ const port = config.PORT || 3001;
 
 //parse json
 app.use(express.json())
-app.use(cors())
+
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}
+app.use(cors(corsOptions))
 
 //routes
 app.use('/ai', expressAsyncHandler(airouter))
