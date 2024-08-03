@@ -11,7 +11,7 @@ sourcesrouter.post('/keywords', async (req, res) => {
         if (keywords.length === 0) 
             return res.status(400).send('Keyword is required');
         const result = await getSources(keywords);
-        res.send({ success: true, payload: result });
+        res.status(201).send({ success: true, payload: result });
     } catch (error) {
         logger('Error in sources router', error as Error);
         res.status(500).send('An error occurred');

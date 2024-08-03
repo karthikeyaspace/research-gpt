@@ -2,7 +2,6 @@ import express from 'express';
 import airouter from './routes/ai'
 import sourcesrouter from './routes/sources';
 import config from './utils/env';
-import expressAsyncHandler from 'express-async-handler';
 import cors from 'cors';
 
 
@@ -19,9 +18,10 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
+
 //routes
-app.use('/ai', expressAsyncHandler(airouter))
-app.use('/sources', expressAsyncHandler(sourcesrouter))
+app.use('/ai', airouter)
+app.use('/sources', sourcesrouter)
 
 
 app.get('/', (req, res) => {
