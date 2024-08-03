@@ -14,8 +14,8 @@ app.use(express.json())
 app.use(cors())
 
 //routes
-app.use('/api/ai', expressAsyncHandler(airouter))
-app.use('/api/sources', expressAsyncHandler(sourcesrouter))
+app.use('/ai', expressAsyncHandler(airouter))
+app.use('/sources', expressAsyncHandler(sourcesrouter))
 
 
 app.get('/', (req, res) => {
