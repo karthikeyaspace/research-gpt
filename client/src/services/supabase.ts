@@ -1,9 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = "https://txpjupgxqfaksnmjvpeq.supabase.co";
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY as string;
 
-if (!supabaseKey) 
-  throw new Error("SUPABASE_KEY is not defined");
+if (!supabaseKey || !supabaseUrl) 
+  throw new Error("SUPABASE Crediantials are not defined");
 
 export const supabase = createClient(supabaseUrl, supabaseKey);

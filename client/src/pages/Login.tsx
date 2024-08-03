@@ -25,13 +25,11 @@ const Login: React.FC = () => {
     e.preventDefault();
     setError("");
     if (login) {
-      const { user, error } = await signIn(formData.email, formData.password);
+      const { error } = await signIn(formData.email, formData.password);
       if (error) setError(error.message);
-      else console.log(user, "signIn data");
     } else {
-      const { user, error } = await signUp(formData.email, formData.password);
+      const { error } = await signUp(formData.email, formData.password);
       if (error) setError(error.message);
-      else console.log(user);
     }
   };
 

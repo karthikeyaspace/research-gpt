@@ -2,6 +2,7 @@ import express from 'express';
 import airouter from './routes/ai'
 import sourcesrouter from './routes/sources';
 import config from './utils/env';
+import expressAsyncHandler from 'express-async-handler';
 
 
 const app = express();
@@ -11,8 +12,8 @@ const port = config.PORT || 3001;
 app.use(express.json())
 
 //routes
-app.use('/ai', airouter)
-app.use('/sources', sourcesrouter)
+app.use('/ai', expressAsyncHandler(airouter))
+app.use('/sources', expressAsyncHandler(sourcesrouter))
 
 
 app.get('/', (req, res) => {

@@ -11,7 +11,7 @@ airouter.post('/prompt', async (req, res) => {
         const result = await generateText(usertext); //json return
         res.send({ success: true, payload: result });
     } catch (error) {
-        logger('An error occurred in aiController', error as Error);
+        logger('An error occurred in ai router', error as Error);
         res.status(500).send('An error occurred');
     }
 });

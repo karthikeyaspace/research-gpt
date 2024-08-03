@@ -30,7 +30,7 @@ const signInWithGoogle = async () => {
     const { error }  = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "http://localhost:5173/chat",
+        redirectTo: `${import.meta.env.VITE_FRONTEND_URL}/chat`,
       },
     });
     return { error };
