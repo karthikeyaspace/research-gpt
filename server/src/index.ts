@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  return console.log(`Express is listening PORT ${port} : https://localhost:${port}`);
+  return console.log(`Express is listening PORT ${port} : http://localhost:${port}`);
 });
 
 
