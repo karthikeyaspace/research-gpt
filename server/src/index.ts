@@ -11,14 +11,15 @@ const port = config.PORT || 3001;
 //parse json
 app.use(express.json())
 
+// cors is not working with vercel, so make a middleware with using npm cors which only accepts post requests
 
-const corsOptions = {
-  origin: "https://researchgptai.vercel.app",
-  methods: "POST",
-  optionsSuccessStatus: 200
-}
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', config.FRONTEND_URL);
+  res.header('Access-Control-Allow-Methods', 'POST');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
-app.use(cors(corsOptions))
 
 
 //routes
