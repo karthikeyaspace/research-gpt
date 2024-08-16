@@ -14,18 +14,20 @@ import NotFound from "./pages/NotFound";
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { ChatProvider } from "./context/ChatContext";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { session } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     if (!session) {
       navigate("/login");
     } else setLoading(false);
   }, [session, navigate]);
 
-  if (loading) return <div>Loading..........</div>;
+  if (loading) return null;
 
   return session ? children : null;
 };
@@ -61,9 +63,11 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Router>
-          <AppContent />
-        </Router>
+        <ChatProvider>
+          <Router>
+            <AppContent />
+          </Router>
+        </ChatProvider>
       </AuthProvider>
     </ThemeProvider>
   );

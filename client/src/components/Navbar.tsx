@@ -4,7 +4,7 @@ import Logo from "../assets/Logo";
 import { useTheme } from "../context/ThemeContext";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { clearChat } from "../utils/localStoragChat";
+import { useChatContext } from "../context/ChatContext";
 
 const Navbar: React.FC = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -12,6 +12,7 @@ const Navbar: React.FC = () => {
   const word = session?.user.user_metadata.email[0].toUpperCase() || "?";
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const { clearChat } = useChatContext();
 
   return (
     <nav className="h-16 px-6 w-full fixed top-0 left-0 text-white bg-primary z-10 flex justify-between items-center">
@@ -73,7 +74,7 @@ const Navbar: React.FC = () => {
                   <button
                     onClick={() => {
                       signOut();
-                      navigate('/')
+                      navigate("/");
                     }}
                     className="text-red-500 hover:bg-red-500/10 p-2 rounded-md flex items-center transition duration-150"
                   >

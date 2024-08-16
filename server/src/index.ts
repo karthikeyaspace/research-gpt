@@ -11,12 +11,8 @@ const port = config.PORT || 3001;
 //parse json
 app.use(express.json())
 
-const corsOptions = {
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}
-app.use(cors(corsOptions))
+
+app.use(cors())
 
 
 //routes
@@ -25,12 +21,11 @@ app.use('/sources', sourcesrouter)
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Express server of ResearchGPT');
 });
 
 app.listen(port, () => {
-  return console.log(`Express is listening PORT ${port} : http://localhost:${port}`);
+  console.log(`Server is running on port ${port} : http://localhost:${port}`);
 });
 
-
-//run the server -- npm run dev
+export default app;

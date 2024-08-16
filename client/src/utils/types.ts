@@ -29,7 +29,6 @@ interface SourcesProps {
   payload: Payload;
 }
 
-
 interface YTCardProps {
   source: {
     videoId: string;
@@ -61,6 +60,13 @@ interface ThemeContextTypes {
   toggleTheme: () => void;
 }
 
+interface ChatContextTypes {
+  messages: MessageType[];
+  setMessages: React.Dispatch<React.SetStateAction<MessageType[]>>;
+  storeChat: (messages: MessageType[]) => void;
+  clearChat: () => void;
+}
+
 export type {
   Payload,
   MessageType,
@@ -73,4 +79,5 @@ export type {
   AuthContextTypes,
   Session,
   ThemeContextTypes,
+  ChatContextTypes,
 };

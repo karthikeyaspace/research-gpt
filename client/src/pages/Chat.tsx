@@ -3,15 +3,12 @@ import UserInput from "../components/UserInput";
 import axios from "axios";
 import ResponseText from "../components/ResponseText";
 import UserText from "../components/UserText";
-import { MessageType } from "../utils/types";
-import { initChat } from "../utils/testMessages";
-import { getChat, storeChat } from "../utils/localStoragChat";
+import { useChatContext } from "../context/ChatContext";
+
 const url = import.meta.env.VITE_BACKEND_URL;
 
 const Chat: React.FC = () => {
-  const [messages, setMessages] = useState<MessageType[]>(
-    getChat().length > 0 ? getChat() : initChat
-  );
+  const { messages, setMessages, storeChat } = useChatContext();
   const [loading, setLoading] = useState<boolean>(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +46,9 @@ const Chat: React.FC = () => {
 
   const fetchPrompt = async (prompt: string) => {
     try {
-      const response = await axios.post(url + "/ai/prompt", { usertext: prompt });
+      const response = await axios.post(url + "/ai/prompt", {
+        usertext: prompt,
+      });
 
       if (response.data.success) {
         setMessages((prevMessages) => [
