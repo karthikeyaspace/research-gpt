@@ -12,7 +12,13 @@ const port = config.PORT || 3001;
 app.use(express.json())
 
 
-app.use(cors())
+const corsOptions = {
+  origin: "https://researchgptai.vercel.app",
+  methods: "POST",
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
 
 
 //routes
