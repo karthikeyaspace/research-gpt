@@ -27,9 +27,9 @@ async function generateText(msg: string) {
   try {
     const result = await model.generateContent(prompt);
     const text = result.response.text();
-    console.log(text)
+    // console.log(text)
     const jsonres = JSON.parse(text);
-    console.log(jsonres)
+    // console.log(jsonres)
     return jsonres;
   } catch (error) {
     logger("Error at ai Controller", error as Error);
