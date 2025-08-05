@@ -7,7 +7,7 @@ const airouter = express.Router();
 airouter.post('/prompt', async (req, res) => {
     try {
         const { usertext } = req.body;
-        if (!usertext) 
+        if (!usertext)
             return res.status(400).send('Prompt is required');
         const result = await generateText(usertext); //json return
         res.status(201).send({ success: true, payload: result });

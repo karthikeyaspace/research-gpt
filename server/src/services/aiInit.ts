@@ -6,7 +6,7 @@ if (!apiKey) throw new Error("GOOGLE_API_KEY is not set");
 
 const genai = new GoogleGenerativeAI(apiKey || "");
 const model = genai.getGenerativeModel({
-  model: "gemini-1.5-flash",
+  model: "gemini-2.0-flash",
   generationConfig: { responseMimeType: "application/json" },
 });
 

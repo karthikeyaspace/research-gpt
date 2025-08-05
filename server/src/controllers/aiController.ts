@@ -16,20 +16,19 @@ async function generateText(msg: string) {
       - keep the keywords and follow_up_questions array empty if the question asked by user are not educational and research related.
       - Ensure your responses are academically sound, unbiased, and up-to-date with current research and best practices in education.
       - For every question asked, dig deeper into the topic, provide context, and elaborate your response.
-      - is user asks question related to coding, dont give code, just respond with how to do the problem in message, give floowup questions, and keywords also.
+      - is user asks question related to coding, dont give code, just respond with how to do the problem in message, give follow up questions, and keywords also.
+      - When user send any code, give detailed explanation of the code as per users query, dont give any keywords and followup questions.
       - While responding, dont just stick to education, explore a topic in broader perspective. 
       - When user says hi, how are you and similar questions, greet them and tell about yourself, dont give any keywords and followup questions.
-      - When user send any code, give detailed explanation of the code as per users query, dont give any keywords and followup questions.
-      Remember, your goal is to assist with research and learning, providing valuable insights and encouraging further exploration of academic topics.
       
-      - Human query: ${msg + " in brief, give each point in detail"}, 
+      Your goal is to assist with research and learning, providing valuable insights and encouraging further exploration of academic topics.
+      
+      - Human query: ${msg + " in brief and detail"}, 
   `;
   try {
     const result = await model.generateContent(prompt);
     const text = result.response.text();
-    // console.log(text)
     const jsonres = JSON.parse(text);
-    // console.log(jsonres)
     return jsonres;
   } catch (error) {
     logger("Error at ai Controller", error as Error);

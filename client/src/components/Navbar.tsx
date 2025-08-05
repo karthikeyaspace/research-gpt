@@ -3,13 +3,12 @@ import { useAuth } from "../context/AuthContext";
 import Logo from "../assets/Logo";
 import { useTheme } from "../context/ThemeContext";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import { useChatContext } from "../context/ChatContext";
 
 const Navbar: React.FC = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const { session, signOut } = useAuth();
-  const word = session?.user.user_metadata.email[0].toUpperCase() || "?";
+  const { user, signOut } = useAuth();
+  const word = user?.email?.[0].toUpperCase() || "?";
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const { clearChat } = useChatContext();
@@ -38,10 +37,7 @@ const Navbar: React.FC = () => {
         </div>
 
         {showMenu && (
-          <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.1, ease: "easeInOut" }}
+          <div
             className="absolute top-12 right-0 bg-secondary shadow-md rounded-md p-2 w-48 origin-top select-none"
           >
             <div className="flex flex-col">
@@ -59,7 +55,7 @@ const Navbar: React.FC = () => {
               >
                 Toggle Theme
               </button>
-              {session && (
+              {user && (
                 <>
                   <button
                     className="text-primary hover:bg-primary/10 p-2 rounded-md flex items-center transition duration-150"
@@ -83,7 +79,7 @@ const Navbar: React.FC = () => {
                 </>
               )}
             </div>
-          </motion.div>
+          </div>
         )}
       </div>
     </nav>

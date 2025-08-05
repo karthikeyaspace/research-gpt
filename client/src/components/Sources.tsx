@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { SourcesProps } from "../utils/types";
 import YoutubeCard from "./YoutubeCard";
 import loadingGif from "../assets/loading.gif";
 import GoogleSearchCard from "./GoogleSearchCard";
-const url = import.meta.env.VITE_BACKEND_URL;
+import { api } from "../services/api";
 
 const Sources: React.FC<SourcesProps> = ({ show, toggleShow, payload }) => {
   const [sources, setSources] = useState<any>({
@@ -17,7 +16,7 @@ const Sources: React.FC<SourcesProps> = ({ show, toggleShow, payload }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.post(url+"/sources/keywords", {
+        const response = await api.post("/sources/keywords", {
           keywords: payload.keywords,
         });
         if (response.data.success) setSources(response.data.payload);
@@ -39,9 +38,8 @@ const Sources: React.FC<SourcesProps> = ({ show, toggleShow, payload }) => {
   };
   return (
     <div
-      className={`fixed top-0 right-0 w-full h-full flex justify-end z-20 transform transition-transform duration-500 ease-in-out ${
-        show ? "translate-x-0" : "translate-x-full"
-      }`}
+      className={`fixed top-0 right-0 w-full h-full flex justify-end z-20 transform transition-transform duration-500 ease-in-out ${show ? "translate-x-0" : "translate-x-full"
+        }`}
       onClick={handleOuterClick}
     >
       <div className="w-full md:w-1/2 h-full relative p-6 bg-[#27272a] text-white overflow-y-scroll small-scrollbar">
@@ -60,32 +58,32 @@ const Sources: React.FC<SourcesProps> = ({ show, toggleShow, payload }) => {
         <div className="flex flex-wrap justify-center gap-4">
           {sources.ytSources && sources.ytSources.length > 0
             ? sources.ytSources.map((source: any, index: number) => (
-                <YoutubeCard
-                  key={index}
-                  source={{
-                    videoId: source.id.videoId,
-                    title: source.snippet.title,
-                    description: source.snippet.description,
-                    thumbnail: source.snippet.thumbnails.medium.url,
-                    channelTitle: source.snippet.channelTitle,
-                    publishedAt: source.snippet.publishedAt,
-                  }}
-                />
-              ))
+              <YoutubeCard
+                key={index}
+                source={{
+                  videoId: source.id.videoId,
+                  title: source.snippet.title,
+                  description: source.snippet.description,
+                  thumbnail: source.snippet.thumbnails.medium.url,
+                  channelTitle: source.snippet.channelTitle,
+                  publishedAt: source.snippet.publishedAt,
+                }}
+              />
+            ))
             : !loading && <p>No YouTube sources found</p>}
         </div>
         <div className="mt-8">
           {sources.googleSources && sources.googleSources.length > 0
             ? sources.googleSources.map((source: any, index: number) => (
-                <GoogleSearchCard
-                  key={index}
-                  source={{
-                    title: source.title,
-                    link: source.link,
-                    snippet: source.snippet,
-                  }}
-                />
-              ))
+              <GoogleSearchCard
+                key={index}
+                source={{
+                  title: source.title,
+                  link: source.link,
+                  snippet: source.snippet,
+                }}
+              />
+            ))
             : !loading && <p>No Google search results found</p>}
         </div>
       </div>

@@ -2,7 +2,9 @@ import config from "../utils/env";
 import logger from "../utils/helpers";
 
 //sources from yt data api
+
 const apiKey = config.GOOGLE_PROJECT_KEY;
+
 const getYTSources = async (keywords: []) => {
   if (!apiKey) throw new Error("GOOGLE_PROJECT_KEY is not set");
   const q = keywords.join("|");

@@ -12,10 +12,12 @@ interface MessageType {
 interface ResponseTextProps {
   payload: Payload;
   sendMessage: (ques: string) => void;
+  isNewResponse?: boolean;
 }
 
 interface UserTextProps {
   payload: Payload;
+  isLatest?: boolean;
 }
 
 interface InputProps {
@@ -48,13 +50,6 @@ interface GoogleCardProps {
   };
 }
 
-import { Session } from "@supabase/supabase-js";
-
-interface AuthContextTypes {
-  session: Session | null;
-  signOut: () => void;
-}
-
 interface ThemeContextTypes {
   theme: "dark" | "light";
   toggleTheme: () => void;
@@ -76,8 +71,6 @@ export type {
   SourcesProps,
   YTCardProps,
   GoogleCardProps,
-  AuthContextTypes,
-  Session,
   ThemeContextTypes,
   ChatContextTypes,
 };

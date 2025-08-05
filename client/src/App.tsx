@@ -1,4 +1,4 @@
-import React, { ReactNode, Suspense, useEffect, useState } from "react";
+import React, { ReactNode, Suspense, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,19 +17,24 @@ import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { ChatProvider } from "./context/ChatContext";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
-  const { session } = useAuth();
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
-    setLoading(true);
-    if (!session) {
+    if (!loading && !user) {
       navigate("/login");
-    } else setLoading(false);
-  }, [session, navigate]);
+    }
+  }, [user, loading, navigate]);
 
-  if (loading) return null;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-secondary">Loading...</div>
+      </div>
+    );
+  }
 
-  return session ? children : null;
+  return user ? children : null;
 };
 
 const AppContent: React.FC = () => {
