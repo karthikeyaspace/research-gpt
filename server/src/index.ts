@@ -2,7 +2,6 @@ import express from 'express';
 import airouter from './routes/ai'
 import sourcesrouter from './routes/sources';
 import config from './utils/env';
-import cors from 'cors';
 
 
 const app = express();
